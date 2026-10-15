@@ -1,0 +1,999 @@
+{
+  "path": "C:\\Users\\Admin\\Desktop\\New folder\\TÀI LIỆU GIỚI THIỆU DỰ ÁN HG MEDIA.docx",
+  "core_properties": {
+    "title": "Word Document",
+    "subject": "",
+    "author": "",
+    "keywords": "",
+    "last_modified_by": "python-docx",
+    "created": "None",
+    "modified": "2026-09-08 07:46:55+00:00"
+  },
+  "paragraphs": [
+    {
+      "index": 0,
+      "style": "normal",
+      "text": "CÔNG TY TNHH GIẢI PHÁP PHÂN TÍCH DỮ LIỆU INSIGHT DATA"
+    },
+    {
+      "index": 8,
+      "style": "normal",
+      "text": "TÀI LIỆU GIỚI THIỆU DỰ ÁN HG MEDIA"
+    },
+    {
+      "index": 11,
+      "style": "Heading 1",
+      "text": "BẢNG THEO DÕI THAY ĐỔI"
+    },
+    {
+      "index": 15,
+      "style": "Heading 1",
+      "text": "I. GIỚI THIỆU KHÁCH HÀNG"
+    },
+    {
+      "index": 16,
+      "style": "normal",
+      "text": "Website: https://hgmedia.com.vn/vi/"
+    },
+    {
+      "index": 17,
+      "style": "normal",
+      "text": "HG Media là công ty truyền thông số đa nền tảng, được thành lập vào năm 2018, chuyên sản xuất, sáng tạo nội dung và quảng bá các sản phẩm giải trí trên môi trường kỹ thuật số. Với đội ngũ nhân sự trẻ, tài năng và đầy nhiệt huyết, HG Media luôn cập nhật những xu hướng marketing mới nhất nhằm mang đến những trải nghiệm giải trí sáng tạo, khác biệt và thú vị cho khán giả toàn cầu."
+    },
+    {
+      "index": 18,
+      "style": "normal",
+      "text": "HG Media hiện sở hữu hệ thống kênh YouTube về âm nhạc và giải trí, các hãng nhạc độc lập (Helios Records, Deep Universe), cùng các playlist có tầm ảnh hưởng lớn trên Spotify như DEEP HOUSE 2021, CHILL MUSIC 2021, RELAXING MUSIC. Công ty đã hợp tác với hơn 300 đối tác trong nước và quốc tế, bao gồm Warner Music, MCV Group, Metub và Deep Disco Music, đồng thời triển khai thành công hơn 20 dự án lớn trong lĩnh vực âm nhạc số."
+    },
+    {
+      "index": 19,
+      "style": "Heading 1",
+      "text": "II. TỔNG QUAN DỰ ÁN"
+    },
+    {
+      "index": 20,
+      "style": "Heading 2",
+      "text": "1. Tổng quan dự án"
+    },
+    {
+      "index": 21,
+      "style": "normal",
+      "text": "Tên dự án: Xây dựng kho dữ liệu và hệ thống báo cáo thông minh HG Media"
+    },
+    {
+      "index": 22,
+      "style": "normal",
+      "text": "Hiện trạng: Khách hàng có một hệ thống công nghệ thông tin với nhiều cấu phần riêng biệt, được xây dựng riêng lẻ để đáp ứng nhu cầu vận hành và quản trị của doanh nghiệp như:"
+    },
+    {
+      "index": 23,
+      "style": "normal",
+      "text": "- Odoo (Dùng để quản lí quy trình sản xuất, thu mua tài nguyên),"
+    },
+    {
+      "index": 24,
+      "style": "normal",
+      "text": "- HG Stock (Dùng để quản lí quy trình phân phối và sử dụng tài nguyên),"
+    },
+    {
+      "index": 25,
+      "style": "normal",
+      "text": "- Tool quản lí kênh Youtube (Dùng để quản lí hệ thống kênh Youtube của HG Media chiếm 80% doanh thu)"
+    },
+    {
+      "index": 26,
+      "style": "normal",
+      "text": "- VIral IQ (Dùng để nghiên cứu đối thủ)"
+    },
+    {
+      "index": 27,
+      "style": "normal",
+      "text": "- Hệ thống các báo cáo từ các đối tác phân phối Distributor"
+    },
+    {
+      "index": 28,
+      "style": "normal",
+      "text": "Các hệ thống được liên kết với nhau bằng một cây master data HG xây dựng."
+    },
+    {
+      "index": 29,
+      "style": "normal",
+      "text": "HG cần tạo một kho dữ liệu nhằm tổng hợp nhiều nguồn dữ liệu này từ đó chuẩn hóa và sử dụng dữ liệu, tiến tới ứng dụng AI trong tương lai."
+    },
+    {
+      "index": 30,
+      "style": "normal",
+      "text": "Yêu cầu: Xây dựng hệ thống kho dữ liệu (Data Warehouse) nhằm chuẩn hóa, lưu trữ, tích hợp và khai thác dữ liệu từ các nguồn khác nhau, đồng thời phục vụ cho các báo cáo phân tích kinh doanh."
+    },
+    {
+      "index": 31,
+      "style": "normal",
+      "text": "Phạm vi:"
+    },
+    {
+      "index": 32,
+      "style": "normal",
+      "text": "Nguồn dữ liệu: Odoo, HGStock, Tool quản lí Kênh Youtube, ViralIQ, dữ liệu lấy từ các distributor, dữ liệu lấy từ các kênh DSP"
+    },
+    {
+      "index": 33,
+      "style": "normal",
+      "text": "Output: Phát triển 4 báo cáo theo yêu cầu của HG Media bao gồm:"
+    },
+    {
+      "index": 34,
+      "style": "normal",
+      "text": "+ Báo cáo sản xuất tài nguyên"
+    },
+    {
+      "index": 35,
+      "style": "normal",
+      "text": "+ Báo cáo sử dụng tài nguyên"
+    },
+    {
+      "index": 36,
+      "style": "normal",
+      "text": "+ Báo cáo hệ thống kênh Youtube"
+    },
+    {
+      "index": 37,
+      "style": "normal",
+      "text": "+ Báo cáo thị trường Youtube"
+    },
+    {
+      "index": 38,
+      "style": "Heading 2",
+      "text": "2. Hiện trạng"
+    },
+    {
+      "index": 39,
+      "style": "Heading 3",
+      "text": "2.1. Thuật ngữ"
+    },
+    {
+      "index": 41,
+      "style": "Heading 3",
+      "text": "2.2. Mô hình kinh doanh"
+    },
+    {
+      "index": 42,
+      "style": "normal",
+      "text": "<Nói về mô hình sản xuất video, kênh phân phối ntn, post lên các nền tảng, thu tiền từ đâu…>"
+    },
+    {
+      "index": 43,
+      "style": "normal",
+      "text": "HG Media vận hành theo mô hình khép kín từ khâu sản xuất, lưu trữ, quản lý phân phối đến khai thác tài nguyên nội dung số (âm nhạc và video) trên các nền tảng kỹ thuật số toàn cầu."
+    },
+    {
+      "index": 44,
+      "style": "normal",
+      "text": "a. Mô hình sản xuất tài nguyên (Video & Âm nhạc) Mọi yêu cầu sản xuất hoặc thu mua tài nguyên xuất phát từ bộ phận Marketing và SEO thông qua hệ thống Odoo ERP (đóng vai trò nguồn nhận yêu cầu). Quá trình này được chia làm hai luồng song song:"
+    },
+    {
+      "index": 45,
+      "style": "normal",
+      "text": "Luồng Âm nhạc: Đội ngũ tiến hành tự sản xuất nhạc hoặc thu mua từ các kho bản quyền. Các sản phẩm này sau đó được cấp mã định danh ISRC (fingerprint) và đăng ký Content ID (CID) trên nền tảng YouTube để bảo vệ bản quyền. Do đặc thù nhạc không cần qua khâu xử lý hình ảnh hậu kỳ, sau khi có CID sẽ được đẩy thẳng vào kho."
+    },
+    {
+      "index": 46,
+      "style": "normal",
+      "text": "Luồng Video: Tiến hành quay dựng hình ảnh hoặc mua bản quyền Footage từ bên thứ ba. Sau đó, sản phẩm trải qua các bước hậu kỳ chuyên sâu (cắt ghép, chỉnh màu, thêm hiệu ứng) để hoàn thiện và nghiệm thu."
+    },
+    {
+      "index": 47,
+      "style": "normal",
+      "text": "Toàn bộ tài nguyên hoàn chỉnh được đưa lên lưu trữ tập trung tại HG Stock (kho đám mây trung tâm) kèm theo siêu dữ liệu (metadata) đầy đủ. Hệ thống này đảm nhận việc lưu trữ, đo lường số lần sử dụng và phân bổ tài nguyên cho các bộ phận khai thác."
+    },
+    {
+      "index": 48,
+      "style": "normal",
+      "text": "b. Kênh phân phối và đăng tải nội dung: Tài nguyên sau khi nghiệm thu sẽ được mang đi phân phối qua hai hệ sinh thái nền tảng chính:"
+    },
+    {
+      "index": 49,
+      "style": "normal",
+      "text": "Mạng lưới kênh YouTube: Video và âm nhạc được đăng tải trực tiếp lên hệ thống các kênh âm nhạc, kênh giải trí thuộc sở hữu hoặc sự quản lý của HG Media."
+    },
+    {
+      "index": 50,
+      "style": "normal",
+      "text": "Các nền tảng DSP (Digital Service Providers): Tài nguyên âm nhạc được đưa lên các nền tảng streaming trực tuyến toàn cầu (như Spotify, Apple Music, TikTok, SoundCloud...) thông qua các Nhà phân phối trung gian (Distributor) bao gồm: Routenote, LANDR, Ditto, Tunecore, ONERPM và WMG."
+    },
+    {
+      "index": 51,
+      "style": "normal",
+      "text": "c. Dòng doanh thu: Toàn bộ hệ thống tạo ra doanh thu dựa trên công thức cốt lõi: Doanh thu = Số lượt View/Stream × Đơn giá (Rate). Đơn giá này biến động linh hoạt theo từng nền tảng, loại tiền tệ (gốc USD) và quốc gia của người nghe."
+    },
+    {
+      "index": 52,
+      "style": "normal",
+      "text": "Từ nền tảng YouTube: Dòng tiền thu về dựa trên lượt xem (View) của khán giả. Dữ liệu doanh thu này có thể theo dõi với độ trễ thấp (khoảng 3 ngày) và được quy vết chính xác về từng tài nguyên gốc thông qua \"Mã biên tập\" (mã định danh gắn trong phần mô tả của video)."
+    },
+    {
+      "index": 53,
+      "style": "normal",
+      "text": "Từ nền tảng DSPs: Dòng tiền được sinh ra từ lượt nghe (Stream) qua các Playlist (của cá nhân, của thuật toán Spotify) hoặc trang cá nhân của Nghệ sĩ (Artist Profile). Tiền từ các DSPs sẽ đổ về các Nhà phân phối (Distributor), sau đó Distributor mới đối soát và thanh toán lại cho HG Media theo từng hãng nhạc (như Helios Records, Hitkend Records, City Loud, Deep Universe...). Doanh thu thực tế từ luồng này thường có độ trễ khá dài, từ 1–3 tháng (có thể lên tới 6 tháng). Giữa các kỳ đối soát, HG Media sử dụng phương pháp crawl dữ liệu View/Stream trực tiếp để ước tính doanh thu nội bộ."
+    },
+    {
+      "index": 57,
+      "style": "normal",
+      "text": "Sơ đồ mô hình kinh doanh: https://drive.google.com/file/d/1g5JBuPHcTX-QtccaPEfJmZyzqsiLQ8ll/view?usp=sharing"
+    },
+    {
+      "index": 59,
+      "style": "normal",
+      "text": "HG Media vận hành theo mô hình sản xuất và khai thác tài nguyên nội dung số, trong đó tài nguyên âm nhạc và video được tạo ra (hoặc thu mua từ bên thứ 3 hoặc công ty con trong tập đoàn), lưu trữ tập trung, sau đó phân phối lên các nền tảng số để tạo doanh thu từ lượt xem/stream. Toàn bộ vòng đời tài nguyên được quản lý qua 4 giai đoạn chính:"
+    },
+    {
+      "index": 60,
+      "style": "normal",
+      "text": "Giai đoạn 1 - Nguồn yêu cầu: Phòng MKT và Phòng SEO thuộc các công ty thành viên đặt lệnh ORDER (đơn đặt hàng nội dung), quản lý trên hệ thống Odoo ERP."
+    },
+    {
+      "index": 61,
+      "style": "normal",
+      "text": "Giai đoạn 2 - Sản xuất & Thu mua: Tài nguyên được tạo ra theo hai luồng song song. Luồng nhạc gồm sản xuất nhạc hoặc thu mua kho bản quyền, sau đó cấp mã định danh ISRC (fingerprint) và đăng ký Content ID (CID) trên YouTube để bảo vệ bản quyền. Luồng video gồm sản xuất hình ảnh hoặc thu mua Footage, qua bước hậu kỳ (cắt ghép, làm màu, thêm hiệu ứng) để ra sản phẩm hoàn chỉnh. Nhạc không cần hậu kỳ, sau khi có CID được đẩy thẳng vào kho lưu trữ."
+    },
+    {
+      "index": 62,
+      "style": "normal",
+      "text": "Giai đoạn 3 - Kho tài sản trung tâm (HG Stock): Toàn bộ tài nguyên sau khi nghiệm thu được đẩy lên HG Stock (kho lưu trữ đám mây trung tâm), kèm theo metadata đầy đủ. HG Stock đảm nhiệm ba chức năng: lưu trữ, đo lường lượng sử dụng và phân phối tài nguyên cho các team khai thác. Cơ chế thu hồi tự động sau 14 ngày không sử dụng giúp tối ưu hóa kho tài nguyên."
+    },
+    {
+      "index": 63,
+      "style": "normal",
+      "text": "Giai đoạn 4 - Khai thác & Doanh thu: Tài nguyên được phân phối qua hai kênh chính:"
+    },
+    {
+      "index": 64,
+      "style": "normal",
+      "text": "(1) YouTube Channel: kênh nhạc và kênh giải trí, tạo doanh thu từ View;"
+    },
+    {
+      "index": 65,
+      "style": "normal",
+      "text": "(2) DSPs: Spotify, Apple Music, TikTok và các nền tảng khác, tạo doanh thu từ Stream. Doanh thu được quy về tài nguyên gốc thông qua Mã biên tập (mã định danh được gắn vào description của từng video khi đăng lên YouTube)."
+    },
+    {
+      "index": 66,
+      "style": "Heading 3",
+      "text": "2.3. Chi tiết về nghiệp vụ"
+    },
+    {
+      "index": 67,
+      "style": "normal",
+      "text": "a. Nghiệp vụ sản xuất tài nguyên"
+    },
+    {
+      "index": 68,
+      "style": "normal",
+      "text": "HG media quản trị nghiệp vụ sản xuất tài nguyên dưới 1 vài KPI:"
+    },
+    {
+      "index": 69,
+      "style": "normal",
+      "text": "- Số lượng đơn đặt hàng: Một đơn = 1 đợt đặt hàng (1 tháng có thể đặt nhiều lần từ các đơn vị khai thác)"
+    },
+    {
+      "index": 70,
+      "style": "normal",
+      "text": "- Tổng giá trị đơn đặt hàng: Giá trị tính toán ban đầu cho toàn bộ đơn hàng đó"
+    },
+    {
+      "index": 71,
+      "style": "normal",
+      "text": "- Số lượng bài hát trong đơn hàng: 1 đơn gồm nhiều bài hát"
+    },
+    {
+      "index": 72,
+      "style": "normal",
+      "text": "- Số lượng bài nghiệm thu: Số lượng bài hát đã hoàn tất quá trình sản xuất và được chấm điểm đạt yêu cầu để sẵn sàng bàn giao."
+    },
+    {
+      "index": 73,
+      "style": "normal",
+      "text": "- Chấm điểm các bài được nghiệp thu: Điểm số đánh giá chất lượng của các bài hát đã hoàn thành (theo thang điểm nội bộ)"
+    },
+    {
+      "index": 74,
+      "style": "normal",
+      "text": "- SLA sản xuất đến Marketing = SLA sản xuất đến vận hành Label + SLA vận hành Label đến vận hành Youtube + SLA vận hành Youtube đến Marketing"
+    },
+    {
+      "index": 75,
+      "style": "normal",
+      "text": "- SLA sản xuất đến vận hành Label: Thời gian từ khi bắt đầu sản xuất đến khi tài nguyên được đưa đến vận hành Label để phát hành bài hát, cấp mã ISRC"
+    },
+    {
+      "index": 76,
+      "style": "normal",
+      "text": "- SLA vận hành Label đến vận hành Youtube: Thời gian tài nguyên từ vận hành Label được đưa đến vận hành Youtube để bật CID"
+    },
+    {
+      "index": 77,
+      "style": "normal",
+      "text": "- SLA vận hành Youtube đến Marketing: Thời gian tài nguyên từ vận hành Youtube được đưa đến trợ lý Marketing"
+    },
+    {
+      "index": 78,
+      "style": "normal",
+      "text": "- KPI số lượng sản xuất: Số lượng tài nguyên cần sản xuất theo kế hoạch"
+    },
+    {
+      "index": 79,
+      "style": "normal",
+      "text": "Hiệu quả sản xuất được tiếp cận dưới các chiều thông tin:"
+    },
+    {
+      "index": 80,
+      "style": "normal",
+      "text": "- Thời gian: Ngày / tuần / tháng / quý"
+    },
+    {
+      "index": 81,
+      "style": "normal",
+      "text": "- Dự án: Nhóm các đơn đặt hàng thuộc cùng một chiến dịch."
+    },
+    {
+      "index": 82,
+      "style": "normal",
+      "text": "- Dự án con: Phân nhỏ trong dự án"
+    },
+    {
+      "index": 83,
+      "style": "normal",
+      "text": "- Kho: HG Stock, Kho lưu trữ, phân loại tài nguyên: Nơi lưu trữ và phân loại tài nguyên"
+    },
+    {
+      "index": 84,
+      "style": "normal",
+      "text": "- A&R: Nhân sự trực tiếp phụ trách sản xuất tài nguyên"
+    },
+    {
+      "index": 85,
+      "style": "normal",
+      "text": "- Quản lí sản xuất: Nhân sự quản lý tiến độ và chất lượng sản xuất"
+    },
+    {
+      "index": 86,
+      "style": "normal",
+      "text": "- Team sản xuất: Nhóm thực hiện sản xuất tài nguyên"
+    },
+    {
+      "index": 87,
+      "style": "normal",
+      "text": "b. Nghiệp vụ khai thác tài nguyên"
+    },
+    {
+      "index": 88,
+      "style": "normal",
+      "text": "HG Media tạo doanh thu theo công thức cốt lõi:"
+    },
+    {
+      "index": 89,
+      "style": "normal",
+      "text": "Doanh thu = Số lượt View/Stream × Đơn giá (Rate)"
+    },
+    {
+      "index": 90,
+      "style": "normal",
+      "text": "Đơn giá biến động theo từng nền tảng, từng quốc gia và đơn vị tiền tệ (gốc là USD). Có hai nguồn doanh thu chính:"
+    },
+    {
+      "index": 91,
+      "style": "normal",
+      "text": "YouTube: Doanh thu theo kênh, hiện đang được phát triển thêm khả năng theo dõi doanh thu đến từng tài nguyên gốc (độ trễ khoảng 3 ngày)."
+    },
+    {
+      "index": 92,
+      "style": "normal",
+      "text": "DSPs (Spotify, Apple Music, TikTok,...): Doanh thu thực tế được quyết toán qua các Distributor (nhà phân phối trung gian như Ditto, Tunecore...), nhưng thường bị trễ từ 1–3 tháng, có thể lên đến 6 tháng. Vì vậy, HG Media cần hệ thống thu thập dữ liệu View/Stream trực tiếp từ các nền tảng để ước tính doanh thu gần thời gian thực, phục vụ ra quyết định nhanh."
+    },
+    {
+      "index": 93,
+      "style": "normal",
+      "text": "Để hiểu hiệu quả kinh doanh, dữ liệu được tiếp cận theo 4 chiều:"
+    },
+    {
+      "index": 94,
+      "style": "normal",
+      "text": "User: Thu thập lượt nghe/xem theo người dùng ở mức gần realtime mà không yêu cầu đăng nhập, phục vụ đo lường xu hướng tiêu thụ nội dung."
+    },
+    {
+      "index": 95,
+      "style": "normal",
+      "text": "Playlist: Playlist là nguồn tạo ra lượt nghe chính cho các bài hát. Hệ thống thu thập danh sách bài hát liên quan và theo dõi tổng lượt nghe của toàn playlist theo ngày. Lưu ý: không xem được lượt nghe của từng bài riêng lẻ trong playlist."
+    },
+    {
+      "index": 96,
+      "style": "normal",
+      "text": "Artist: Phân tích hiệu suất nghệ sĩ theo nhiều chiều, view của danh sách playlist nổi bật theo ngày (có thể tuỳ chọn khoảng thời gian), số lượt nghe theo từng quốc gia (top), và phân bổ nguồn stream của bài hát (nghe từ playlist cá nhân/thư viện, từ hàng đợi, từ playlist Spotify, từ gợi ý tự động, từ playlist người dùng khác tạo). HG Media quản lý hơn 100 nghệ sĩ, trong đó khoảng 20 nghệ sĩ trọng điểm cần theo dõi sâu."
+    },
+    {
+      "index": 97,
+      "style": "normal",
+      "text": "Distributor: Liên quan trực tiếp đến doanh thu thực tế và phân phối nội dung. Mỗi distributor có dashboard và format báo cáo riêng, dữ liệu bị trễ và cần quyền truy cập. Hiện HG Media làm việc với 6 distro (12 tài khoản có dashboard) và 1 distro gửi file trực tiếp qua email. Hệ thống cần chuẩn hóa dữ liệu từ tất cả các nguồn này, bổ sung metadata (tagging theo dự án) để phục vụ phân tích tổng hợp."
+    },
+    {
+      "index": 98,
+      "style": "normal",
+      "text": "Lưu ý:"
+    },
+    {
+      "index": 99,
+      "style": "Heading 3",
+      "text": "2.3. Hiện trạng năng lực của khách hàng"
+    },
+    {
+      "index": 100,
+      "style": "normal",
+      "text": "Khách hàng có nhân sự hiểu về DWH nhưng ở mức không sâu,"
+    },
+    {
+      "index": 101,
+      "style": "normal",
+      "text": "Có nhân sự nắm rõ về cách vận hành Database"
+    },
+    {
+      "index": 102,
+      "style": "normal",
+      "text": "Có nhân sự phụ trách về việc xây dựng báo cáo trên Looker, có kĩ năng SQL"
+    },
+    {
+      "index": 103,
+      "style": "normal",
+      "text": "Có khả năng xử lí số liệu từ đa nguồn bằng tay"
+    },
+    {
+      "index": 104,
+      "style": "Heading 2",
+      "text": "3. Nhân sự chủ chốt của khách hàng"
+    },
+    {
+      "index": 106,
+      "style": "Heading 2",
+      "text": "4. Kiến trúc hệ thống gốc của khách hàng"
+    },
+    {
+      "index": 108,
+      "style": "Heading 2",
+      "text": "5 Phạm vi dự án"
+    },
+    {
+      "index": 109,
+      "style": "normal",
+      "text": "Danh sách hệ thống:"
+    },
+    {
+      "index": 112,
+      "style": "normal",
+      "text": "Danh sách Distro:"
+    },
+    {
+      "index": 116,
+      "style": "normal",
+      "text": "Danh sách báo cáo"
+    },
+    {
+      "index": 118,
+      "style": "Heading 2",
+      "text": "6. Phương pháp tổng hợp số liệu"
+    },
+    {
+      "index": 119,
+      "style": "Heading 3",
+      "text": "6.1. Phương thức thu thập dữ liệu (Data Ingestion)"
+    },
+    {
+      "index": 120,
+      "style": "normal",
+      "text": "Kết nối trực tiếp vào Cơ sở dữ liệu (Database): Truy cập và trích xuất dữ liệu thẳng từ Database của các hệ thống nội bộ bao gồm Odoo (nghiệp vụ sản xuất, thu mua), HG Stock (quản lý phân phối tài nguyên) và Tool quản lý kênh Youtube."
+    },
+    {
+      "index": 121,
+      "style": "normal",
+      "text": "Qua Auto-click / Crawl (Quét dữ liệu): Đối với các nền tảng phân phối (Distributor) yêu cầu đăng nhập trên hệ thống (Routenote, LANDR, Ditto, Tunecore, ONERPM, SoundCloud) và các DSP (như Spotify for Artist), hệ thống sử dụng các kịch bản tự động hóa (bot) để giả lập trình duyệt, tự động truy cập vào Dashboard để quét dữ liệu view/stream và xuất tải các báo cáo thô (RAW data)."
+    },
+    {
+      "index": 122,
+      "style": "normal",
+      "text": "Qua Import File (Nạp tệp thủ công/tự động): Đọc và xử lý trực tiếp các file dữ liệu dạng bảng tính đối với các nhà phân phối không có Dashboard hoặc gửi báo cáo định kỳ qua email/drive (ví dụ: WMG)."
+    },
+    {
+      "index": 123,
+      "style": "Heading 3",
+      "text": "6.2. Quy tắc làm sạch và Ánh xạ dữ liệu (Data Mapping)"
+    },
+    {
+      "index": 124,
+      "style": "normal",
+      "text": "Toàn bộ dữ liệu thô tải về từ các nền tảng sẽ trải qua luồng chuẩn hóa (Cleanse) để loại bỏ dữ liệu rác, đồng nhất định dạng ngày tháng và tiền tệ (quy chuẩn về USD)."
+    },
+    {
+      "index": 125,
+      "style": "normal",
+      "text": "Sau đó, hệ thống thực hiện ánh xạ (Mapping) thông tin từ nền tảng về cây Master Data của HG Media thông qua các trường khóa (Key) như: URL, Tên bài hát, Mã định danh (ISRC/Mã biên tập), Tên nghệ sĩ và Tên dự án/Hãng nhạc..."
+    },
+    {
+      "index": 126,
+      "style": "normal",
+      "text": "Tài liệu tham khảo cấu trúc:"
+    },
+    {
+      "index": 127,
+      "style": "normal",
+      "text": "File Mapping chi tiết: Bảng Mapping Spreadsheet"
+    },
+    {
+      "index": 128,
+      "style": "normal",
+      "text": "Diagram Tổng hợp luồng: Sơ đồ Diagram"
+    },
+    {
+      "index": 132,
+      "style": "Heading 2",
+      "text": "7. Kế hoạch triển khai"
+    },
+    {
+      "index": 133,
+      "style": "normal",
+      "text": "NOIBO_Kế hoạch HG MEDIA"
+    },
+    {
+      "index": 134,
+      "style": "Heading 2",
+      "text": "8. Quy trình thực hiện và nghiệm thu sản phẩm"
+    },
+    {
+      "index": 138,
+      "style": "normal",
+      "text": "Đã có đội IT thử một số luồng"
+    },
+    {
+      "index": 139,
+      "style": "normal",
+      "text": "DWH bên IT xử lí"
+    },
+    {
+      "index": 140,
+      "style": "normal",
+      "text": "Đầu mối trưởng nhóm: Nguyễn Anh Dũng"
+    },
+    {
+      "index": 141,
+      "style": "normal",
+      "text": "1. Câu hỏi của HG Media"
+    },
+    {
+      "index": 142,
+      "style": "normal",
+      "text": "Có cần khảo sát stake holder không?"
+    },
+    {
+      "index": 143,
+      "style": "normal",
+      "text": "- Hiện tại chỉ lấy những gì báo cáo cần phải không?: Có thể lấy nhiều hơn,"
+    },
+    {
+      "index": 144,
+      "style": "normal",
+      "text": "Khi làm báo cáo xem báo cáo cần gì thì lấy chỉ số -> Sếp xem -> yêu cầu phát sinh -> Lấy số khó."
+    },
+    {
+      "index": 145,
+      "style": "normal",
+      "text": "Chỉ số này trả lời câu hỏi gì -> Lấy các thông tin đưa lên báo cáo"
+    },
+    {
+      "index": 146,
+      "style": "normal",
+      "text": "2. Câu hỏi của CEO:"
+    },
+    {
+      "index": 147,
+      "style": "normal",
+      "text": "- Chia sẻ hiện trạng về nhân sự công ty: Hỗ trợ tối ưu quy trình, có request nhanh để 2 bên làm việc tối ưu hơn."
+    },
+    {
+      "index": 148,
+      "style": "normal",
+      "text": "- Người sử dụng chính là POD (Chủ tịch, giám đốc,...)"
+    },
+    {
+      "index": 149,
+      "style": "normal",
+      "text": "- Năm 2025 có trải nghiệm bên Odoo, trong quá trình phối hợp tốt, nhưng sản phẩm cuối cùng không phải điều HG happy."
+    },
+    {
+      "index": 150,
+      "style": "normal",
+      "text": "Điều quan trọng hướng đến: làm việc chính với PM, cầu nối chia sẻ là điều quan trọng."
+    },
+    {
+      "index": 153,
+      "style": "normal",
+      "text": "4. Hiện trạng khách hàng"
+    },
+    {
+      "index": 154,
+      "style": "normal",
+      "text": "Odoo đang sử dụng những phân hệ nào?"
+    },
+    {
+      "index": 155,
+      "style": "normal",
+      "text": "Sản xuất, thu mua tài nguyên"
+    },
+    {
+      "index": 156,
+      "style": "normal",
+      "text": "-> Lưu trữ trên HG Stock (Lưu trữ tài nguyên)"
+    },
+    {
+      "index": 157,
+      "style": "normal",
+      "text": "-> SEO"
+    },
+    {
+      "index": 158,
+      "style": "normal",
+      "text": "GL dùng tool nội bộ: thu chi duyệt ở tool này"
+    },
+    {
+      "index": 159,
+      "style": "normal",
+      "text": "MISA dùng để xuất hóa đơn"
+    },
+    {
+      "index": 160,
+      "style": "normal",
+      "text": "—"
+    },
+    {
+      "index": 161,
+      "style": "normal",
+      "text": "Odoo bản thân là nền tảng, phải customize nhiều"
+    },
+    {
+      "index": 162,
+      "style": "normal",
+      "text": "5. Thông tin của anh Dũng"
+    },
+    {
+      "index": 163,
+      "style": "normal",
+      "text": "Timeline:"
+    },
+    {
+      "index": 164,
+      "style": "normal",
+      "text": "Khảo sát 1 tuàn: -> Cần lên danh sách stakeholder để khảo sát"
+    },
+    {
+      "index": 165,
+      "style": "normal",
+      "text": "Báo cáo thị trường Youtube: Nên để triển khai sau, các sếp không sử dụng nhiều"
+    },
+    {
+      "index": 166,
+      "style": "normal",
+      "text": "Báo cáo sử dụng tài nguyên đổi tên thành báo cáo hiệu quả tài nguyên: Thấy có thêm nguồn khác cần lấy vào"
+    },
+    {
+      "index": 167,
+      "style": "normal",
+      "text": "Ai sử dụng báo cáo nào:"
+    },
+    {
+      "index": 168,
+      "style": "normal",
+      "text": "+ Báo cáo hiệu quả tài nguyên: CEO, giám đốc tài chính"
+    },
+    {
+      "index": 169,
+      "style": "normal",
+      "text": "+"
+    },
+    {
+      "index": 172,
+      "style": "normal",
+      "text": "3. Thuyết trình với khách hàng"
+    },
+    {
+      "index": 173,
+      "style": "normal",
+      "text": "- Giới thiệu về công ty"
+    },
+    {
+      "index": 174,
+      "style": "normal",
+      "text": "- Giới thiệu về scope công việc"
+    },
+    {
+      "index": 175,
+      "style": "normal",
+      "text": "-"
+    }
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "rows": [
+        [
+          "Thông tin tài liệu",
+          "Thông tin tài liệu"
+        ],
+        [
+          "Phiên bản tài liệu",
+          "1.0"
+        ],
+        [
+          "Ngày lập tài liệu",
+          ""
+        ],
+        [
+          "Ngày cập nhật cuối",
+          ""
+        ],
+        [
+          "Đơn vị ban hành",
+          ""
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "rows": [
+        [
+          "STT",
+          "Ngày",
+          "Phiên bản",
+          "Hình thức",
+          "Mô tả",
+          "Tác giả"
+        ],
+        [
+          "1",
+          "",
+          "1.0",
+          "A",
+          "",
+          "Đặng Anh Tùng"
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "rows": [
+        [
+          "Thuật ngữ",
+          "Ý nghĩa"
+        ],
+        [
+          "Song / Track",
+          "Bài hát"
+        ],
+        [
+          "Artist",
+          "Nghệ sĩ"
+        ],
+        [
+          "Playlist",
+          "Danh sách nhạc do người dùng hoặc Artist hoặc chính nền tảng auto tạo ra"
+        ],
+        [
+          "Distributor",
+          "Nhà phân phối nhạc trên các nền tảng"
+        ],
+        [
+          "View",
+          ""
+        ],
+        [
+          "Stream",
+          ""
+        ],
+        [
+          "Download",
+          "Lượt tải bài hát về máy nghe nhạc như iTune"
+        ],
+        [
+          "Added playlist",
+          "Lượt thêm bài hát vào 1 playlist"
+        ],
+        [
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "rows": [
+        [
+          "",
+          "View",
+          "Doanh thu"
+        ],
+        [
+          "Bài hát",
+          "Có lượt view khi ở URL bài hát",
+          "Vào màn hình của Distributor Lấy từ đâu: Đăng nhập vào dashboard của từng Distributor (hiện có 12 tài khoản từ 6 distro có dashboard, 1 distro gửi file trực tiếp qua email). Dữ liệu xuất ra dạng file (RAW data). Theo gì: Lấy theo số lượt stream/view của từng tháng, sau đó nhân với đơn giá (rate) tương ứng theo từng nền tảng và khu vực địa lý → ra doanh thu ước tính. Đơn vị gốc là USD. Dữ liệu doanh thu thực từ Distributor bị trễ 1–3 tháng, có thể lên 6 tháng → không dùng để theo dõi ngắn hạn được. Vì vậy cần crawl view trực tiếp từ nền tảng để ước tính doanh thu gần realtime. Doanh thu bài hát theo Playlist: Playlist của chính nghệ sĩ (Artist's own playlist): Xem được trực tiếp trên Artist Profile → nhưng Artist Profile không có khả năng tặng/thêm playlist, nên team HG phải thao tác từ tài khoản user thông thường. Playlist của người dùng khác: Bài hát được người dùng bên ngoài thêm vào playlist cá nhân của họ → xem được số stream đổ về từ nguồn này trong phần phân bổ nguồn stream của bài hát trên Spotify for Artists. Playlist của Spotify: Spotify chủ động xếp bài vào các playlist thuật toán → cũng hiển thị trong phần phân bổ nguồn stream, cho thấy bao nhiêu % traffic đến từ kênh này. Cách crawl thực tế: Đi từ playlist → lấy danh sách bài trong playlist → quét view từng bài theo URL Không dùng API (yêu cầu quyền cao, xác thực phức tạp) → dùng crawl HTML + auto-click (Selenium) Với playlist có 100% bài của HG → lấy nguyên stream. Với playlist chỉ có ~50% bài của HG → nhân tỉ lệ để ước tính phần stream thuộc về HG Dữ liệu lưu theo ngày (daily snapshot) để theo dõi pattern và estimate doanh thu theo slot thời gian"
+        ],
+        [
+          "Playlist",
+          "Chỉ có lượt view của Playlist Không có lượt view bài hát Spotify: lượt saves -> không có doanh thu",
+          "Spotify không có doanh thu"
+        ],
+        [
+          "Artist",
+          "Danh sách số lượt nghe của bài hát theo quốc gia Lượt streams: top các playlist nổi bật theo thời gian",
+          "không lấy"
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "rows": [
+        [
+          "STT",
+          "Tên",
+          "Vai trò trong dự án",
+          "Nhiệm vụ"
+        ],
+        [
+          "1",
+          "Nguyễn Thuỳ Linh",
+          "PM",
+          "- Đầu mối trao đổi chính giữa INDA và HG Media. - Đặt ra yêu cầu và đảm bảo INDA thực hiện đúng mong muốn. - Kiểm tra tiến độ dự án."
+        ],
+        [
+          "2",
+          "Nguyễn Anh Dũng",
+          "Phụ trách kỹ thuật",
+          "- Đầu mối kỹ thuật, hỗ trợ INDA về mặt hạ tầng và hệ thống. - Quản lý cơ sở dữ liệu và các công cụ nội bộ (Odoo, HG Stock, Tool quản lý kênh). - Phối hợp xử lý các vấn đề kỹ thuật phát sinh."
+        ],
+        [
+          "3",
+          "Nguyễn Thục An",
+          "Phụ trách báo cáo",
+          "- Quản lý và cung cấp dữ liệu đầu vào cho các báo cáo. - Kiểm tra, đối chiếu số liệu báo cáo sau khi INDA phát triển. - Đại diện phía HG Media nghiệm thu và xác nhận độ chính xác của báo cáo."
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "rows": [
+        [
+          "Hệ thống",
+          "Thông tin"
+        ],
+        [
+          "Odoo",
+          "Quản lí toàn bộ quy trình sản xuất, thu mua"
+        ],
+        [
+          "HG Stock",
+          "Lưu tài nguyên: - Quản lí tài nguyên - Phân phối tài nguyên đến kênh nào, không thống kê số liệu chi tiết"
+        ],
+        [
+          "Quản lý kênh",
+          "Quản lí metadata kênh, số liệu kênh, chi tiết đến từng video"
+        ],
+        [
+          "ViralIQ",
+          "Tool nghiên cứu đối thủ, thị trường"
+        ],
+        [
+          "Tool biên tập",
+          "Lưu log sử dụng tài nguyên trên HGStock để sản xuất thành phẩm"
+        ],
+        [
+          "Spotify",
+          "Sử dụng Spotify for Artist"
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "rows": [
+        [
+          "Distro",
+          "Dự án/Hãng",
+          "Cách thức tải báo cáo"
+        ],
+        [
+          "Routenote",
+          "Helios Records",
+          "Trên nền tảng"
+        ],
+        [
+          "Routenote",
+          "Hitkend Records",
+          "Trên nền tảng"
+        ],
+        [
+          "Routenote",
+          "Dự Án Khác",
+          "Trên nền tảng"
+        ],
+        [
+          "Routenote",
+          "Dự Án Ngoài",
+          "Trên nền tảng"
+        ],
+        [
+          "Routenote",
+          "Dự Án Ngoài",
+          "Trên nền tảng"
+        ],
+        [
+          "LANDR",
+          "Hitkend Records",
+          "Trên nền tảng"
+        ],
+        [
+          "Ditto",
+          "Helios Records",
+          "Trên nền tảng"
+        ],
+        [
+          "Ditto",
+          "Dự Án Ngoài",
+          "Trên nền tảng"
+        ],
+        [
+          "Ditto",
+          "Dự Án Ngoài",
+          "Trên nền tảng"
+        ],
+        [
+          "Tunecore",
+          "Helios Records",
+          "Trên nền tảng"
+        ],
+        [
+          "ONERPM",
+          "City Loud",
+          "Trên nền tảng"
+        ],
+        [
+          "SoundCloud",
+          "Deep Universe",
+          "Trên nền tảng"
+        ],
+        [
+          "WMG",
+          "Helios Records",
+          "File sheet"
+        ]
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "index": 0,
+      "orientation": "PORTRAIT (0)",
+      "page_width": 7562215,
+      "page_height": 10689590,
+      "top_margin": 914400,
+      "bottom_margin": 914400,
+      "left_margin": 914400,
+      "right_margin": 914400,
+      "header_distance": 457200,
+      "footer_distance": 457200,
+      "header": [],
+      "footer": []
+    }
+  ],
+  "inline_shapes": 3
+}

@@ -1,0 +1,1710 @@
+{
+  "path": "C:\\Users\\Admin\\Desktop\\New folder\\SD_26_GIMASYS_01_TÀI_LIỆU_MÔ_TẢ_DỮ_LIỆU_DỰ_ÁN_GMS.docx",
+  "core_properties": {
+    "title": "",
+    "subject": "",
+    "author": "",
+    "keywords": "",
+    "last_modified_by": "Hiếu Đỗ Trung",
+    "created": "2026-06-10 13:35:00+00:00",
+    "modified": "2026-06-10 13:50:00+00:00"
+  },
+  "paragraphs": [
+    {
+      "index": 0,
+      "style": "Normal",
+      "text": "CÔNG TY TNHH GIẢI PHÁP PHÂN TÍCH DỮ LIỆU INSIGHT DATA"
+    },
+    {
+      "index": 6,
+      "style": "Normal",
+      "text": "TÀI LIỆU"
+    },
+    {
+      "index": 7,
+      "style": "Normal",
+      "text": "MÔ TẢ DỮ LIỆU DỰ ÁN GMS"
+    },
+    {
+      "index": 13,
+      "style": "Normal",
+      "text": "BẢNG THEO DÕI HIỆU LỰC VÀ THAY ĐỔI"
+    },
+    {
+      "index": 25,
+      "style": "Normal",
+      "text": "(*) A (Add) – thêm mới, M (Modify) – sửa đổi, D (Delete) – xóa"
+    },
+    {
+      "index": 26,
+      "style": "Normal",
+      "text": "MỤC LỤC"
+    },
+    {
+      "index": 30,
+      "style": "Heading 1",
+      "text": "1. TỔNG QUAN DỰ ÁN"
+    },
+    {
+      "index": 31,
+      "style": "Heading 2",
+      "text": "1.1. Mục đích tài liệu"
+    },
+    {
+      "index": 32,
+      "style": "Normal",
+      "text": "Tài liệu này mô tả toàn bộ thông tin kỹ thuật về dữ liệu trong dự án GMS, bao gồm: mô hình dữ liệu (Data Model), từ điển dữ liệu (Data Dictionary) chi tiết từng cột theo DDL BigQuery, luồng dữ liệu (DataFlow) và cơ chế xử lý lỗi (Error Handler). Tài liệu phục vụ các đội BA, Dev và QA trong quá trình triển khai chuyển đổi BigQuery → ClickHouse."
+    },
+    {
+      "index": 33,
+      "style": "Heading 2",
+      "text": "1.2. Phạm vi"
+    },
+    {
+      "index": 34,
+      "style": "Normal",
+      "text": "Dự án GMS thực hiện chuyển đổi 52 object trải dài 04 domain (1a_hotstreaming, commerce_data, master_data, ffp) với tổng cộng 2452 cột. Trong đó:"
+    },
+    {
+      "index": 35,
+      "style": "Normal",
+      "text": "• Các BASE TABLE được migrate thẳng sang ClickHouse, giữ nguyên tên bảng nhưng đổi kiểu dữ liệu theo chuẩn ClickHouse."
+    },
+    {
+      "index": 36,
+      "style": "Normal",
+      "text": "• Các VIEW trên BigQuery KHÔNG migrate thẳng mà được chuyển thành dbt model trên ClickHouse, vật chất hóa thành bảng mart."
+    },
+    {
+      "index": 37,
+      "style": "Normal",
+      "text": "• Các bảng có tiền tố tmp_ / t_ được xếp loại staging/intermediate, là output của các Procedure trên BQ và sẽ được chuyển thành dbt model intermediate."
+    },
+    {
+      "index": 38,
+      "style": "Normal",
+      "text": "• Một số bảng (Loại 4) chỉ được tạo trực tiếp trên ClickHouse: tbl_customer_plan (mới), city_master (ffp)."
+    },
+    {
+      "index": 39,
+      "style": "Normal",
+      "text": "• Phương thức migrate: hầu hết là full-load; một số bảng lớn dùng incremental theo trường thời gian (s2_coupon: departure_date; s2_ticket_trip, t_s2_details, transactions: travel_date; s4_coupon, s4_ticket_trip: purchase_date; t_s4_details: iss_date)."
+    },
+    {
+      "index": 40,
+      "style": "Heading 2",
+      "text": "1.3. Đối tượng sử dụng"
+    },
+    {
+      "index": 41,
+      "style": "Heading 1",
+      "text": "2. DATA MODEL (MÔ HÌNH DỮ LIỆU)"
+    },
+    {
+      "index": 42,
+      "style": "Heading 2",
+      "text": "2.1. Sơ đồ tổng thể"
+    },
+    {
+      "index": 43,
+      "style": "Normal",
+      "text": "Phân nhóm object theo 4 loại migrate × 4 domain:"
+    },
+    {
+      "index": 45,
+      "style": "Normal",
+      "text": "Giải thích các loại:"
+    },
+    {
+      "index": 46,
+      "style": "Normal",
+      "text": "• Loại 1 — Table migrate thẳng BQ → CH, giữ tên, chỉ đổi kiểu dữ liệu."
+    },
+    {
+      "index": 47,
+      "style": "Normal",
+      "text": "• Loại 2 — View BQ chuyển thành dbt model trên CH."
+    },
+    {
+      "index": 48,
+      "style": "Normal",
+      "text": "• Loại 3 — Bảng staging/intermediate (prefix tmp_ hoặc t_), xử lý trung gian trong dbt."
+    },
+    {
+      "index": 49,
+      "style": "Normal",
+      "text": "• Loại 4 — Object chỉ tồn tại trên CH (tạo mới)."
+    },
+    {
+      "index": 50,
+      "style": "Heading 2",
+      "text": "2.2. Danh sách Object"
+    },
+    {
+      "index": 51,
+      "style": "Normal",
+      "text": "Tổng hợp toàn bộ object trong phạm vi dự án, phân nhóm theo domain. Cột \"Size (GB)\" lấy từ BigQuery, cột \"Migrate\" là phương thức nạp (full / incremental theo trường ngày)."
+    },
+    {
+      "index": 53,
+      "style": "Normal",
+      "text": "Domain: 1a_hotstreaming"
+    },
+    {
+      "index": 55,
+      "style": "Normal",
+      "text": "Domain: commerce_data"
+    },
+    {
+      "index": 57,
+      "style": "Normal",
+      "text": "Domain: master_data"
+    },
+    {
+      "index": 59,
+      "style": "Normal",
+      "text": "Domain: ffp"
+    },
+    {
+      "index": 60,
+      "style": "Heading 2",
+      "text": "2.3. Mô tả quan hệ giữa các Object"
+    },
+    {
+      "index": 61,
+      "style": "Normal",
+      "text": "Toàn bộ gồm 4 pipeline độc lập, chạy theo thứ tự: master_data → 1a_hotstreaming → commerce_data → ffp."
+    },
+    {
+      "index": 62,
+      "style": "Normal",
+      "text": "Pipeline 1: master_data"
+    },
+    {
+      "index": 63,
+      "style": "Normal",
+      "text": "12 bảng master độc lập, không có dependency nội bộ. Chạy trước tất cả các pipeline khác vì các bảng này là lookup đầu vào cho commerce_data và ffp."
+    },
+    {
+      "index": 64,
+      "style": "Normal",
+      "text": "Pipeline 2: 1a_hotstreaming"
+    },
+    {
+      "index": 65,
+      "style": "Normal",
+      "text": "5 bảng streaming độc lập, nạp song song, cập nhật lúc 09:00 hàng ngày. Không có dependency nội bộ giữa các bảng trong pipeline này."
+    },
+    {
+      "index": 66,
+      "style": "Normal",
+      "text": "Pipeline 3: commerce_data"
+    },
+    {
+      "index": 68,
+      "style": "Normal",
+      "text": "Chú ý: proc_load_s2_details phụ thuộc t_s4_details — do đó proc_load_s4_details phải chạy trước."
+    },
+    {
+      "index": 70,
+      "style": "Normal",
+      "text": "Pipeline 4: ffp"
+    },
+    {
+      "index": 72,
+      "style": "Normal",
+      "text": "Chú ý: tbl_customer_plan và city_master (ffp) là Loại 4 — tạo mới hoàn toàn trên ClickHouse, không migrate từ BigQuery."
+    },
+    {
+      "index": 76,
+      "style": "Heading 1",
+      "text": "3. DATA DICTIONARY (TỪ ĐIỂN DỮ LIỆU)"
+    },
+    {
+      "index": 77,
+      "style": "Heading 2",
+      "text": "3.1. Hướng dẫn đọc từ điển"
+    },
+    {
+      "index": 78,
+      "style": "Normal",
+      "text": "Sheet Data Dictionary"
+    },
+    {
+      "index": 79,
+      "style": "Normal",
+      "text": "Mỗi object được mô tả qua 2 phần:"
+    },
+    {
+      "index": 80,
+      "style": "Normal",
+      "text": "• Bảng thông tin object: tên, loại, schema nguồn/đích, mô tả, tần suất, owner, số cột, size BQ, phương thức migrate, dbt model (nếu có)."
+    },
+    {
+      "index": 81,
+      "style": "Normal",
+      "text": "• Bảng chi tiết cột: liệt kê toàn bộ cột theo DDL gốc trên BigQuery, kèm kiểu dữ liệu đích ClickHouse đã wrap Nullable() theo chuẩn."
+    },
+    {
+      "index": 82,
+      "style": "Normal",
+      "text": "Đối với object Loại 2 (VIEW): cột đầu ra phụ thuộc SELECT statement — tài liệu hiển thị Source SQL rút gọn để tham chiếu."
+    },
+    {
+      "index": 83,
+      "style": "Heading 2",
+      "text": "3.2. Chuẩn mapping kiểu dữ liệu BigQuery → ClickHouse"
+    },
+    {
+      "index": 84,
+      "style": "Heading 1",
+      "text": "4. DATA FLOW (LUỒNG DỮ LIỆU)"
+    },
+    {
+      "index": 85,
+      "style": "Heading 2",
+      "text": "4.1. Kiến trúc tổng thể"
+    },
+    {
+      "index": 86,
+      "style": "Normal",
+      "text": "5 tầng theo thứ tự:"
+    },
+    {
+      "index": 87,
+      "style": "Normal",
+      "text": "BQ source → Staging (dbt) → Intermediate (dbt) → Mart (dbt) → ClickHouse → App / Report"
+    },
+    {
+      "index": 88,
+      "style": "Heading 2",
+      "text": "4.2. Mô tả luồng xử lý"
+    },
+    {
+      "index": 89,
+      "style": "Heading 2",
+      "text": "4.3. Lịch chạy (Schedule)"
+    },
+    {
+      "index": 90,
+      "style": "Heading 2",
+      "text": "4.4. Dependency Map"
+    },
+    {
+      "index": 91,
+      "style": "Normal",
+      "text": "Thứ tự build tổng thể: master_data → 1a_hotstreaming → commerce_data → ffp"
+    },
+    {
+      "index": 92,
+      "style": "Normal",
+      "text": "Pipeline 1: master_data"
+    },
+    {
+      "index": 93,
+      "style": "Normal",
+      "text": "stg_master_* (12 bảng, build song song) → gms.<table_name> (load thẳng, không qua mart layer)"
+    },
+    {
+      "index": 95,
+      "style": "Normal",
+      "text": "Pipeline 2: 1a_hotstreaming"
+    },
+    {
+      "index": 96,
+      "style": "Normal",
+      "text": "Streaming trực tiếp, không qua dbt → gms.streaming_* (5 bảng, nạp song song)"
+    },
+    {
+      "index": 98,
+      "style": "Normal",
+      "text": "Pipeline 3: commerce_data"
+    },
+    {
+      "index": 99,
+      "style": "Normal",
+      "text": "Bước 1 — Staging: tmp_s2_details và tmp_s4_details được chuẩn bị trước."
+    },
+    {
+      "index": 100,
+      "style": "Normal",
+      "text": "Bước 2 — proc_load_s4_details chạy trước: input là tmp_s4_details + 13 bảng lookup/streaming → output: t_s4_details, s4_coupon, s4_ticket_trip."
+    },
+    {
+      "index": 101,
+      "style": "Normal",
+      "text": "Bước 3 — proc_load_s2_details: input là tmp_s2_details + t_s4_details + 14 bảng lookup/streaming (city_master, vnpay_checkin, streaming_checkin_pax, clm_transaction, streaming_ticket_pnr, master_class_group, pcc_web_master, streaming_bk_promo_ticket, streaming_ticket_payment, sale_master, aos_master, account, sales_online_master, sector_distance_master) → output: t_s2_details, s2_coupon, s2_ticket_trip."
+    },
+    {
+      "index": 102,
+      "style": "Normal",
+      "text": "Bước 4 — proc_load_t_s3: input là v_s4_details + t_s2_details + streaming_checkin_pax + city_master + aos_master + tmp_t_s3_additional_flown → output: t_s3, tmp_t_s3_additional_flown."
+    },
+    {
+      "index": 103,
+      "style": "Normal",
+      "text": "Bước 5 — Mart layer (dbt): v_s2_details → mart_commerce_s2_details → gms.tbl_mart_s2_details v_s4_details → mart_commerce_s4_details → gms.tbl_mart_s4_details (đồng thời giữ gms.v_s4_details cho view tương thích)"
+    },
+    {
+      "index": 104,
+      "style": "Normal",
+      "text": "Lưu ý: proc_load_s4_details bắt buộc phải chạy trước proc_load_s2_details vì t_s4_details là input của bước 3."
+    },
+    {
+      "index": 106,
+      "style": "Normal",
+      "text": "Pipeline 4: ffp"
+    },
+    {
+      "index": 107,
+      "style": "Normal",
+      "text": "Bước 1 — Staging (build song song): stg_ffp_customers, stg_ffp_customer2, stg_ffp_recognition, stg_ffp_transactions, stg_ffp_tmp_transactions."
+    },
+    {
+      "index": 108,
+      "style": "Normal",
+      "text": "Bước 2 — Mart layer (build tuần tự, từng bước phụ thuộc bước trước): mart_ffp_recognition_4 → gms.tbl_mart_recognition_4 mart_ffp_transaction_5_3 → gms.tbl_mart_transaction_5_3 mart_ffp_transaction_6 → gms.tbl_mart_transaction_6 mart_ffp_transaction_7 → gms.tbl_mart_transaction_7 mart_ffp_transaction_8_6 → gms.tbl_mart_transaction_8_6 (output cuối)"
+    },
+    {
+      "index": 109,
+      "style": "Normal",
+      "text": "Bước 3 — View layer (dbt, build song song sau mart): v_tbl_mart_Customer2 → mart_ffp_customer2 v_tbl_mart_transaction_5 → mart_ffp_transaction_5 v_tbl_mart_transaction_6 → mart_ffp_transaction_6 v_tbl_mart_transaction_7 → mart_ffp_transaction_7 v_tbl_mart_transaction_8_6 → mart_ffp_transaction_8_6"
+    },
+    {
+      "index": 110,
+      "style": "Normal",
+      "text": "Bước 4 — CH-only (tạo độc lập, không migrate từ BQ): tbl_customer_plan, city_master (ffp)."
+    },
+    {
+      "index": 112,
+      "style": "Heading 1",
+      "text": "5. ERROR HANDLER (XỬ LÝ LỖI)"
+    },
+    {
+      "index": 113,
+      "style": "Heading 2",
+      "text": "5.1. Phân loại lỗi"
+    },
+    {
+      "index": 114,
+      "style": "Heading 2",
+      "text": "5.2. Quy trình xử lý lỗi"
+    },
+    {
+      "index": 115,
+      "style": "Heading 2",
+      "text": "5.3. Log & Alert"
+    },
+    {
+      "index": 116,
+      "style": "Heading 2",
+      "text": "5.4. Checklist kiểm tra sau mỗi lần chạy"
+    },
+    {
+      "index": 117,
+      "style": "Normal",
+      "text": "Số dòng nguồn (BigQuery) khớp số dòng đích (ClickHouse) trong ngưỡng cho phép."
+    },
+    {
+      "index": 118,
+      "style": "Normal",
+      "text": "Không có giá trị NULL ở các cột bắt buộc (NOT NULL)."
+    },
+    {
+      "index": 119,
+      "style": "Normal",
+      "text": "Không có bản ghi trùng duplicate key trên các bảng mart."
+    },
+    {
+      "index": 120,
+      "style": "Normal",
+      "text": "Tất cả dbt test pass (not_null, unique, relationships, custom)."
+    },
+    {
+      "index": 121,
+      "style": "Normal",
+      "text": "Thời gian chạy nằm trong ngưỡng SLA cho phép."
+    },
+    {
+      "index": 122,
+      "style": "Normal",
+      "text": "Không có error log ở mức CRITICAL hoặc HIGH."
+    },
+    {
+      "index": 123,
+      "style": "Normal",
+      "text": "Row count audit ghi nhận đầy đủ vào bảng audit."
+    },
+    {
+      "index": 124,
+      "style": "Normal",
+      "text": "DAG dbt build đúng thứ tự, không có model bị skip do lỗi ref()."
+    },
+    {
+      "index": 125,
+      "style": "Normal",
+      "text": "Các cột ARRAY/STRUCT đã được kiểm tra mapping (ERR-009) trên các bảng có cấu trúc lồng (đặc biệt account, t_s3, 1a_s4_details_streaming)."
+    },
+    {
+      "index": 126,
+      "style": "Normal",
+      "text": "Đã kiểm tra incremental trên các bảng lớn (s2_ticket_trip, s4_ticket_trip, t_s2_details, t_s4_details, transactions) theo trường thời gian tương ứng."
+    },
+    {
+      "index": 128,
+      "style": "Heading 1",
+      "text": "PHỤ LỤC"
+    },
+    {
+      "index": 130,
+      "style": "Heading 2",
+      "text": "A. Thuật ngữ viết tắt"
+    }
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "rows": [
+        [
+          "Thông tin tài liệu",
+          "Thông tin tài liệu"
+        ],
+        [
+          "Phiên bản tài liệu",
+          "1.0"
+        ],
+        [
+          "Ngày lập tài liệu",
+          "09/06/2026"
+        ],
+        [
+          "Ngày cập nhật cuối",
+          "09/06/2026"
+        ],
+        [
+          "Ngày phê duyệt tài liệu",
+          "09/06/2026"
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "rows": [
+        [
+          "STT",
+          "Ngày",
+          "Phiên bản",
+          "Hình thức *",
+          "Mô tả",
+          "Tác giả"
+        ],
+        [
+          "1",
+          "09/06/2026",
+          "1.0",
+          "A",
+          "Tạo mới",
+          "Nguyễn Văn Phú"
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "rows": [
+        [
+          "Đối tượng",
+          "Vai trò",
+          "Phần liên quan"
+        ],
+        [
+          "Business Analyst",
+          "Xác nhận yêu cầu dữ liệu",
+          "Data Model, Data Dictionary"
+        ],
+        [
+          "Developer",
+          "Phát triển & chuyển đổi",
+          "Toàn bộ tài liệu"
+        ],
+        [
+          "QA / Tester",
+          "Kiểm thử dữ liệu",
+          "DataFlow, Error Handler, Data Dictionary"
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "rows": [
+        [
+          "Domain",
+          "Loại 1 (Table)",
+          "Loại 2 (View→dbt)",
+          "Loại 3 (Tmp/Stg)",
+          "Loại 4 (CH-only)",
+          "Tổng",
+          "Công nghệ"
+        ],
+        [
+          "1a_hotstreaming",
+          "5",
+          "0",
+          "0",
+          "0",
+          "5",
+          "BQ → CH / dbt"
+        ],
+        [
+          "commerce_data",
+          "9",
+          "2",
+          "6",
+          "0",
+          "17",
+          "BQ → CH / dbt"
+        ],
+        [
+          "master_data",
+          "12",
+          "0",
+          "0",
+          "0",
+          "12",
+          "BQ → CH / dbt"
+        ],
+        [
+          "ffp",
+          "10",
+          "5",
+          "1",
+          "2",
+          "18",
+          "BQ → CH / dbt"
+        ],
+        [
+          "TỔNG",
+          "36",
+          "7",
+          "7",
+          "2",
+          "52",
+          ""
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "rows": [
+        [
+          "STT",
+          "Tên Object (CH)",
+          "Loại",
+          "Schema nguồn (BQ)",
+          "Size (GB)",
+          "Migrate",
+          "Ghi chú"
+        ],
+        [
+          "1",
+          "streaming_bk_promo_ticket",
+          "Loại 1",
+          "1a_hotstreaming.streaming_bk_promo_ticket",
+          "0.16",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "2",
+          "streaming_booking_ancillary",
+          "Loại 1",
+          "1a_hotstreaming.streaming_booking_ancillary",
+          "1.19",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "3",
+          "streaming_checkin_pax",
+          "Loại 1",
+          "1a_hotstreaming.streaming_checkin_pax",
+          "17.68",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "4",
+          "streaming_ticket_payment",
+          "Loại 1",
+          "1a_hotstreaming.streaming_ticket_payment",
+          "4.19",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "5",
+          "streaming_ticket_pnr",
+          "Loại 1",
+          "1a_hotstreaming.streaming_ticket_pnr",
+          "23.28",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "rows": [
+        [
+          "STT",
+          "Tên Object (CH)",
+          "Loại",
+          "Schema nguồn (BQ)",
+          "Size (GB)",
+          "Migrate",
+          "Ghi chú"
+        ],
+        [
+          "1",
+          "1a_s4_details_streaming",
+          "Loại 1",
+          "commerce_data.1a_s4_details_streaming",
+          "0.17",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "2",
+          "clm_transaction",
+          "Loại 1",
+          "commerce_data.clm_transaction",
+          "2.18",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "3",
+          "s2_coupon",
+          "Loại 1",
+          "commerce_data.s2_coupon",
+          "70.48",
+          "departure_date",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "4",
+          "s2_ticket_trip",
+          "Loại 1",
+          "commerce_data.s2_ticket_trip",
+          "131.19",
+          "travel_date",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "5",
+          "s4_coupon",
+          "Loại 1",
+          "commerce_data.s4_coupon",
+          "82.20",
+          "purchase_date",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "6",
+          "s4_ticket_trip",
+          "Loại 1",
+          "commerce_data.s4_ticket_trip",
+          "159.64",
+          "purchase_date",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "7",
+          "sales_flown_snapshot",
+          "Loại 1",
+          "commerce_data.sales_flown_snapshot",
+          "2.39",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "8",
+          "streaming_ticket",
+          "Loại 1",
+          "commerce_data.streaming_ticket",
+          "—",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "9",
+          "t_s2_details",
+          "Loại 3",
+          "commerce_data.t_s2_details",
+          "90.64",
+          "travel_date",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "10",
+          "t_s3",
+          "Loại 3",
+          "commerce_data.t_s3",
+          "1.52",
+          "full",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "11",
+          "t_s4_details",
+          "Loại 3",
+          "commerce_data.t_s4_details",
+          "168.80",
+          "iss_date",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "12",
+          "tmp_s2_details",
+          "Loại 3",
+          "commerce_data.tmp_s2_details",
+          "2.90",
+          "full",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "13",
+          "tmp_s4_details",
+          "Loại 3",
+          "commerce_data.tmp_s4_details",
+          "5.27",
+          "full",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "14",
+          "tmp_t_s3_additional_flown",
+          "Loại 3",
+          "commerce_data.tmp_t_s3_additional_flown",
+          "0.00",
+          "full",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "15",
+          "tbl_mart_s2_details",
+          "Loại 2",
+          "commerce_data.v_s2_details",
+          "0.02",
+          "full",
+          "View BQ → dbt model: mart_commerce_s2_details"
+        ],
+        [
+          "16",
+          "v_s4_details",
+          "Loại 2",
+          "commerce_data.v_s4_details",
+          "0.00",
+          "full",
+          "View BQ → dbt model: mart_commerce_s4_details"
+        ],
+        [
+          "17",
+          "vnpay_checkin",
+          "Loại 1",
+          "commerce_data.vnpay_checkin",
+          "0.20",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "rows": [
+        [
+          "STT",
+          "Tên Object (CH)",
+          "Loại",
+          "Schema nguồn (BQ)",
+          "Size (GB)",
+          "Migrate",
+          "Ghi chú"
+        ],
+        [
+          "1",
+          "account",
+          "Loại 1",
+          "master_data.account",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "2",
+          "agency_master_manual_import",
+          "Loại 1",
+          "master_data.agency_master_manual_import",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "3",
+          "aos_master",
+          "Loại 1",
+          "master_data.aos_master",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "4",
+          "city_master",
+          "Loại 1",
+          "master_data.city_master",
+          "0.01",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "5",
+          "des_areaout_master",
+          "Loại 1",
+          "master_data.des_areaout_master",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "6",
+          "internal_currency_rate",
+          "Loại 1",
+          "master_data.internal_currency_rate",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "7",
+          "master_class_group",
+          "Loại 1",
+          "master_data.master_class_group",
+          "0.01",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "8",
+          "pcc_web_master",
+          "Loại 1",
+          "master_data.pcc_web_master",
+          "0.00",
+          "fulll",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "9",
+          "sale_master",
+          "Loại 1",
+          "master_data.sale_master",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "10",
+          "sales_indicator_master",
+          "Loại 1",
+          "master_data.sales_indicator_master",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "11",
+          "sales_online_master",
+          "Loại 1",
+          "master_data.sales_online_master",
+          "1.47",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "12",
+          "sector_distance_master",
+          "Loại 1",
+          "master_data.sector_distance_master",
+          "1.46",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ]
+      ]
+    },
+    {
+      "index": 7,
+      "rows": [
+        [
+          "STT",
+          "Tên Object (CH)",
+          "Loại",
+          "Schema nguồn (BQ)",
+          "Size (GB)",
+          "Migrate",
+          "Ghi chú"
+        ],
+        [
+          "1",
+          "city_master (ffp)",
+          "Loại 4",
+          "ffp.city_master",
+          "1.00",
+          "full",
+          "Bảng tạo mới chỉ trên ClickHouse"
+        ],
+        [
+          "2",
+          "customer2",
+          "Loại 1",
+          "ffp.customer2",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "3",
+          "customers",
+          "Loại 1",
+          "ffp.customers",
+          "0.04",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "4",
+          "recognition",
+          "Loại 1",
+          "ffp.recognition",
+          "0.05",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "5",
+          "tbl_capture_customers_last_month",
+          "Loại 1",
+          "ffp.tbl_capture_customers_last_month",
+          "4.45",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "6",
+          "tbl_customer_plan",
+          "Loại 4",
+          "ffp.tbl_customer_plan",
+          "—",
+          "full",
+          "Bảng tạo mới chỉ trên ClickHouse"
+        ],
+        [
+          "7",
+          "tbl_mart_recognition_4",
+          "Loại 1",
+          "ffp.tbl_mart_recognition_4",
+          "2.13",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "8",
+          "tbl_mart_transaction_5_3",
+          "Loại 1",
+          "ffp.tbl_mart_transaction_5_3",
+          "7.81",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "9",
+          "tbl_mart_transaction_6",
+          "Loại 1",
+          "ffp.tbl_mart_transaction_6",
+          "2.82",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "10",
+          "tbl_mart_transaction_7",
+          "Loại 1",
+          "ffp.tbl_mart_transaction_7",
+          "0.00",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "11",
+          "tbl_mart_transaction_8_6",
+          "Loại 1",
+          "ffp.tbl_mart_transaction_8_6",
+          "79.21",
+          "full",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "12",
+          "tmp_transactions",
+          "Loại 3",
+          "ffp.tmp_transactions",
+          "—",
+          "full",
+          "Bảng staging/intermediate"
+        ],
+        [
+          "13",
+          "transactions",
+          "Loại 1",
+          "ffp.transactions",
+          "—",
+          "travel_date",
+          "Migrate thẳng, đổi kiểu dữ liệu"
+        ],
+        [
+          "14",
+          "v_tbl_mart_Customer2",
+          "Loại 2",
+          "ffp.v_tbl_mart_Customer2",
+          "—",
+          "full",
+          "View BQ → dbt model: mart_ffp_Customer2"
+        ],
+        [
+          "15",
+          "v_tbl_mart_transaction_5",
+          "Loại 2",
+          "ffp.v_tbl_mart_transaction_5",
+          "—",
+          "full",
+          "View BQ → dbt model: mart_ffp_transaction_5"
+        ],
+        [
+          "16",
+          "v_tbl_mart_transaction_6",
+          "Loại 2",
+          "ffp.v_tbl_mart_transaction_6",
+          "—",
+          "full",
+          "View BQ → dbt model: mart_ffp_transaction_6"
+        ],
+        [
+          "17",
+          "v_tbl_mart_transaction_7",
+          "Loại 2",
+          "ffp.v_tbl_mart_transaction_7",
+          "—",
+          "full",
+          "View BQ → dbt model: mart_ffp_transaction_7"
+        ],
+        [
+          "18",
+          "tbl_mart_transaction_8_6",
+          "Loại 2",
+          "ffp.v_tbl_mart_transaction_8_6",
+          "—",
+          "full",
+          "View BQ → dbt model: mart_ffp_transaction_8_6"
+        ]
+      ]
+    },
+    {
+      "index": 8,
+      "rows": [
+        [
+          "Procedure / Model",
+          "Input chính",
+          "Output"
+        ],
+        [
+          "proc_load_s2_details",
+          "tmp_s2_details + 14 bảng lookup (city_master, vnpay_checkin, streaming_checkin_pax, clm_transaction, streaming_ticket_pnr, master_class_group, pcc_web_master, streaming_bk_promo_ticket, streaming_ticket_payment, sale_master, aos_master, account, t_s4_details, sales_online_master, sector_distance_master)",
+          "t_s2_details, s2_coupon, s2_ticket_trip"
+        ],
+        [
+          "proc_load_s4_details",
+          "tmp_s4_details + 13 bảng lookup (master/streaming)",
+          "t_s4_details, s4_coupon, s4_ticket_trip"
+        ],
+        [
+          "proc_load_t_s3",
+          "v_s4_details, t_s2_details, streaming_checkin_pax, city_master, aos_master, tmp_t_s3_additional_flown",
+          "t_s3, tmp_t_s3_additional_flown"
+        ],
+        [
+          "dbt mart_commerce_s2_details",
+          "View v_s2_details",
+          "tbl_mart_s2_details (CH — output cuối)"
+        ],
+        [
+          "dbt mart_commerce_s4_details",
+          "View v_s4_details",
+          "tbl_mart_s4_details (CH — output cuối)"
+        ]
+      ]
+    },
+    {
+      "index": 9,
+      "rows": [
+        [
+          "Bước",
+          "Input",
+          "Output"
+        ],
+        [
+          "Nạp nguồn",
+          "customers, customer2, recognition, transactions",
+          "tmp_transactions"
+        ],
+        [
+          "Mart bước 4",
+          "tmp_transactions + bảng nguồn",
+          "tbl_mart_recognition_4"
+        ],
+        [
+          "Mart bước 5_3",
+          "tbl_mart_recognition_4",
+          "tbl_mart_transaction_5_3"
+        ],
+        [
+          "Mart bước 6",
+          "tbl_mart_transaction_5_3",
+          "tbl_mart_transaction_6"
+        ],
+        [
+          "Mart bước 7",
+          "tbl_mart_transaction_6",
+          "tbl_mart_transaction_7"
+        ],
+        [
+          "Mart bước 8_6",
+          "tbl_mart_transaction_7",
+          "tbl_mart_transaction_8_6 (output cuối)"
+        ],
+        [
+          "dbt mart_ffp_customer2",
+          "View v_tbl_mart_Customer2",
+          "Bảng mart CH tương ứng"
+        ],
+        [
+          "dbt mart_ffp_transaction_5/6/7/8_6",
+          "View v_tbl_mart_transaction_5/6/7/8_6",
+          "Bảng mart CH tương ứng"
+        ]
+      ]
+    },
+    {
+      "index": 10,
+      "rows": [
+        [
+          "Kiểu BigQuery",
+          "Kiểu ClickHouse",
+          "Ghi chú"
+        ],
+        [
+          "STRING",
+          "Nullable(String)",
+          "Mặc định Nullable do BQ không enforce NOT NULL ở DDL."
+        ],
+        [
+          "INT64 / INTEGER",
+          "Nullable(Int64)",
+          "Dùng UInt64 nếu chắc chắn không âm."
+        ],
+        [
+          "NUMERIC",
+          "Nullable(Decimal(38, 9))",
+          "BQ NUMERIC mặc định precision 38, scale 9."
+        ],
+        [
+          "BIGNUMERIC",
+          "Nullable(Decimal256(38))",
+          "Trường hợp cần precision rất cao."
+        ],
+        [
+          "FLOAT64 / FLOAT",
+          "Nullable(Float64)",
+          "Tránh dùng cho tiền tệ — ưu tiên Decimal."
+        ],
+        [
+          "BOOL / BOOLEAN",
+          "Nullable(UInt8)",
+          "0 = false, 1 = true."
+        ],
+        [
+          "DATE",
+          "Nullable(Date)",
+          "YYYY-MM-DD."
+        ],
+        [
+          "DATETIME",
+          "Nullable(DateTime)",
+          "Không có timezone (BQ DATETIME)."
+        ],
+        [
+          "TIMESTAMP",
+          "Nullable(DateTime64(6))",
+          "Có timezone — chuẩn hóa về UTC khi load."
+        ],
+        [
+          "TIME",
+          "Nullable(String)",
+          "CH không có TIME — lưu dạng String \"HH:MM:SS\"."
+        ],
+        [
+          "BYTES",
+          "Nullable(String)",
+          "Encode base64 nếu cần."
+        ],
+        [
+          "ARRAY<T>",
+          "Array(<map(T)>)",
+          "Array không bao Nullable ngoài (chỉ bên trong nếu T là Nullable)."
+        ],
+        [
+          "STRUCT<…>",
+          "String (JSON)",
+          "Lưu dạng JSON String — query bằng JSONExtract*."
+        ]
+      ]
+    },
+    {
+      "index": 11,
+      "rows": [
+        [
+          "Tầng",
+          "Naming convention",
+          "Mô tả"
+        ],
+        [
+          "BQ source",
+          "BigQuery (raw)",
+          "BASE TABLE và VIEW gốc trong 4 domain: 1a_hotstreaming, commerce_data, master_data, ffp."
+        ],
+        [
+          "Staging (dbt)",
+          "stg_<domain>_<object>",
+          "Đọc raw từ BQ, ép schema, chuẩn hóa kiểu BQ → CH. VD: stg_commerce_s2_ticket_trip, stg_ffp_customers."
+        ],
+        [
+          "Intermediate (dbt)",
+          "int_<domain>_<object>",
+          "Áp business logic, join giữa stg model. Tương ứng các bảng t_*/tmp_* trên BQ."
+        ],
+        [
+          "Mart (dbt)",
+          "mart_<domain>_<object>",
+          "Vật chất hóa thành bảng mart trên CH. VD: mart_commerce_s2_details → tbl_mart_s2_details."
+        ],
+        [
+          "ClickHouse",
+          "gms.<table>",
+          "Bảng đích phục vụ truy vấn của App / Report."
+        ]
+      ]
+    },
+    {
+      "index": 12,
+      "rows": [
+        [
+          "Bước",
+          "Tên bước",
+          "Mô tả",
+          "Input",
+          "Output"
+        ],
+        [
+          "1",
+          "Trích xuất",
+          "Đọc dữ liệu từ BigQuery qua dbt source.",
+          "BQ Tables/Views",
+          "Raw"
+        ],
+        [
+          "2",
+          "Staging (dbt)",
+          "Load raw vào stg_* — chuẩn hóa kiểu BQ → CH.",
+          "Raw",
+          "stg_*"
+        ],
+        [
+          "3",
+          "Intermediate (dbt)",
+          "Join/filter theo business logic — sinh int_* model.",
+          "stg_*",
+          "int_*"
+        ],
+        [
+          "4",
+          "Mart (dbt)",
+          "Tổng hợp cho báo cáo — sinh mart_* model, vật chất hóa.",
+          "int_*",
+          "mart_* / tbl_mart_*"
+        ],
+        [
+          "5",
+          "Load CH",
+          "Insert/append vào bảng đích CH.",
+          "mart",
+          "CH Tables"
+        ],
+        [
+          "6",
+          "Kiểm tra sau load",
+          "Row count, dbt test, audit checksum.",
+          "CH Tables",
+          "Audit"
+        ]
+      ]
+    },
+    {
+      "index": 13,
+      "rows": [
+        [
+          "Tên Job",
+          "Tần suất",
+          "Giờ chạy",
+          "Phụ thuộc",
+          "Ghi chú"
+        ],
+        [
+          "streaming_jobs_1a",
+          "Real-time",
+          "9h sáng hàng ngày",
+          "Nguồn 1A trực tiếp",
+          "5 bảng streaming_*"
+        ],
+        [
+          "daily_master_data_sync",
+          "Daily",
+          "00:30 UTC+7",
+          "Không",
+          "Sync master_data trước"
+        ],
+        [
+          "daily_commerce_pipeline",
+          "Daily",
+          "01:00 UTC+7",
+          "daily_master_data_sync",
+          "Stg → Int → Mart commerce (proc_load_s2/s4/t_s3)"
+        ],
+        [
+          "daily_ffp_pipeline",
+          "Daily",
+          "02:00 UTC+7",
+          "daily_commerce_pipeline",
+          "Pipeline FFP, các bước mart 4 → 5_3 → 6 → 7 → 8_6"
+        ],
+        [
+          "monthly_capture_snapshot",
+          "Monthly",
+          "Ngày 1 hàng tháng",
+          "daily_ffp_pipeline",
+          "Cho tbl_capture_customers_last_month"
+        ],
+        [
+          "on_demand_agency_import",
+          "On-demand",
+          "Manual trigger",
+          "Không",
+          "Cho agency_master_manual_import"
+        ]
+      ]
+    },
+    {
+      "index": 14,
+      "rows": [
+        [
+          "Mã lỗi",
+          "Loại lỗi",
+          "Mô tả",
+          "Mức độ",
+          "Xử lý ngay?"
+        ],
+        [
+          "ERR-001",
+          "Connection Error",
+          "Không kết nối được nguồn (BQ) hoặc đích (CH).",
+          "CRITICAL",
+          "Có"
+        ],
+        [
+          "ERR-002",
+          "Schema Mismatch",
+          "Sai kiểu dữ liệu giữa BQ và CH (mapping không khớp).",
+          "HIGH",
+          "Có"
+        ],
+        [
+          "ERR-003",
+          "Null Constraint",
+          "Dữ liệu null ở cột bắt buộc (NOT NULL) trên CH.",
+          "HIGH",
+          "Có"
+        ],
+        [
+          "ERR-004",
+          "Duplicate Key",
+          "Trùng primary key khi insert vào CH.",
+          "MEDIUM",
+          "Tuỳ trường hợp"
+        ],
+        [
+          "ERR-005",
+          "Row Count Mismatch",
+          "Số dòng nguồn ≠ số dòng đích sau khi load.",
+          "MEDIUM",
+          "Có"
+        ],
+        [
+          "ERR-006",
+          "Timeout",
+          "Job hoặc dbt run vượt SLA thời gian.",
+          "HIGH",
+          "Có"
+        ],
+        [
+          "ERR-007",
+          "dbt Test Fail",
+          "dbt test (not_null, unique, relationships, custom) không pass.",
+          "HIGH",
+          "Có"
+        ],
+        [
+          "ERR-008",
+          "Partial Load",
+          "Chỉ load được một phần dữ liệu — lỗi mạng/disk giữa chừng.",
+          "CRITICAL",
+          "Có"
+        ],
+        [
+          "ERR-009",
+          "Array/Struct Conversion Error",
+          "Cột ARRAY hoặc STRUCT trên BigQuery không map được sang ClickHouse (Array(T) / String JSON).",
+          "HIGH",
+          "Có"
+        ],
+        [
+          "ERR-010",
+          "dbt ref() Dependency Error",
+          "dbt model dùng ref() đến model chưa được build (sai thứ tự DAG hoặc model thiếu).",
+          "HIGH",
+          "Có"
+        ]
+      ]
+    },
+    {
+      "index": 15,
+      "rows": [
+        [
+          "Mã lỗi",
+          "Nguyên nhân phổ biến",
+          "Bước xử lý",
+          "Người xử lý",
+          "Escalate đến"
+        ],
+        [
+          "ERR-001",
+          "Sai config credentials, network down",
+          "Kiểm tra service account, network, restart connector.",
+          "DevOps",
+          "Tech Lead"
+        ],
+        [
+          "ERR-002",
+          "Thay đổi schema nguồn không đồng bộ",
+          "Cập nhật mapping trong stg model, re-run pipeline.",
+          "Developer",
+          "BA confirm"
+        ],
+        [
+          "ERR-003",
+          "Dữ liệu nguồn thiếu giá trị bắt buộc",
+          "Kiểm tra nguồn, áp default value hoặc loại bản ghi lỗi.",
+          "Developer",
+          "BA confirm"
+        ],
+        [
+          "ERR-004",
+          "Logic upsert chưa đúng, key collision",
+          "Review dbt model, sửa unique key / merge strategy.",
+          "Developer",
+          "Tech Lead"
+        ],
+        [
+          "ERR-005",
+          "Job bị ngắt giữa chừng, filter sai",
+          "Rollback batch, chạy lại từ checkpoint.",
+          "Developer",
+          "Tech Lead"
+        ],
+        [
+          "ERR-006",
+          "Server quá tải, query không tối ưu",
+          "Scale up resource, tối ưu query/index.",
+          "DevOps",
+          "PM"
+        ],
+        [
+          "ERR-007",
+          "Business logic transform sai",
+          "Sửa dbt model, re-run, xác nhận với BA.",
+          "Developer",
+          "BA verify"
+        ],
+        [
+          "ERR-008",
+          "Lỗi mạng, lỗi disk giữa chừng",
+          "Rollback về snapshot trước đó, re-run toàn bộ batch.",
+          "DevOps",
+          "PM"
+        ],
+        [
+          "ERR-009",
+          "Cột ARRAY/STRUCT cấu trúc phức tạp hoặc biến đổi",
+          "Map sang String (JSON) hoặc Array phù hợp, cập nhật dbt model.",
+          "Developer",
+          "Tech Lead"
+        ],
+        [
+          "ERR-010",
+          "DAG dbt thiếu model, sai thứ tự, model bị xóa",
+          "dbt deps + dbt list kiểm tra DAG, build lại model thiếu.",
+          "Developer",
+          "Tech Lead"
+        ]
+      ]
+    },
+    {
+      "index": 16,
+      "rows": [
+        [
+          "Loại log",
+          "Nơi lưu",
+          "Retention",
+          "Alert kênh"
+        ],
+        [
+          "Job execution log",
+          "[CloudWatch / Stackdriver]",
+          "30 ngày",
+          "[Slack / Email]"
+        ],
+        [
+          "Error log",
+          "[Bảng log trong ClickHouse hoặc file S3]",
+          "90 ngày",
+          "[Slack / PagerDuty]"
+        ],
+        [
+          "dbt test result",
+          "[dbt artifacts / S3]",
+          "30 ngày",
+          "[Slack]"
+        ],
+        [
+          "Row count audit",
+          "[Bảng audit trong ClickHouse]",
+          "180 ngày",
+          "Dashboard"
+        ]
+      ]
+    },
+    {
+      "index": 17,
+      "rows": [
+        [
+          "Thuật ngữ",
+          "Giải thích"
+        ],
+        [
+          "BQ",
+          "BigQuery — Nền tảng data warehouse của Google Cloud (nguồn dữ liệu)."
+        ],
+        [
+          "CH",
+          "ClickHouse — Cơ sở dữ liệu phân tích cột (đích dữ liệu)."
+        ],
+        [
+          "dbt",
+          "Data Build Tool — Công cụ transform dữ liệu (staging / intermediate / mart layer)."
+        ],
+        [
+          "GMS",
+          "Tên dự án — Hệ thống đích sau khi chuyển đổi BigQuery → ClickHouse."
+        ],
+        [
+          "SLA",
+          "Service Level Agreement — Cam kết mức dịch vụ."
+        ],
+        [
+          "ETL",
+          "Extract, Transform, Load — Quy trình xử lý dữ liệu."
+        ],
+        [
+          "DDL",
+          "Data Definition Language — Ngôn ngữ định nghĩa cấu trúc dữ liệu."
+        ],
+        [
+          "FFP",
+          "Frequent Flyer Program — Chương trình hội viên bay thường xuyên."
+        ],
+        [
+          "PNR",
+          "Passenger Name Record — Bản ghi thông tin hành khách."
+        ],
+        [
+          "PCC",
+          "Pseudo City Code — Mã đại lý/điểm bán trong hệ thống đặt chỗ."
+        ],
+        [
+          "CLM",
+          "Customer Lifecycle Management — Quản lý vòng đời khách hàng."
+        ],
+        [
+          "DAG",
+          "Directed Acyclic Graph — Đồ thị phụ thuộc dbt model."
+        ],
+        [
+          "RASK/CASK",
+          "Revenue/Cost per Available Seat Kilometer — Doanh thu/chi phí trên ghế-km."
+        ],
+        [
+          "EMD",
+          "Electronic Miscellaneous Document — Chứng từ điện tử (dịch vụ phụ trợ)."
+        ],
+        [
+          "SSR",
+          "Special Service Request — Yêu cầu dịch vụ đặc biệt."
+        ]
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "index": 0,
+      "orientation": "PORTRAIT (0)",
+      "page_width": 7772400,
+      "page_height": 10058400,
+      "top_margin": 914400,
+      "bottom_margin": 914400,
+      "left_margin": 685800,
+      "right_margin": 685800,
+      "header_distance": 449580,
+      "footer_distance": 449580,
+      "header": [],
+      "footer": [
+        "2"
+      ]
+    }
+  ],
+  "inline_shapes": 1
+}

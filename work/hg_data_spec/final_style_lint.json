@@ -1,0 +1,170 @@
+{
+  "input": "D:\\HG_Project\\etl_pipeline\\outputs\\TAI_LIEU_DAC_TA_DU_LIEU_DU_AN_HG_MEDIA.docx",
+  "fonts_by_char_count": {
+    "Arial": 296653
+  },
+  "direct_run_formatting_runs": 17230,
+  "direct_paragraph_formatting_paragraphs": 17384,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 1,
+      "text": "C\u00d4NG TY TNHH GI\u1ea2I PH\u00c1P PH\u00c2N T\u00cdCH D\u1eee LI\u1ec6U INSIGHT DATA",
+      "style": "Normal"
+    },
+    {
+      "para_index": 2,
+      "text": "T\u00c0I LI\u1ec6U",
+      "style": "Normal"
+    },
+    {
+      "para_index": 3,
+      "text": "\u0110\u1eb6C T\u1ea2 D\u1eee LI\u1ec6U D\u1ef0 \u00c1N HG MEDIA",
+      "style": "Normal"
+    },
+    {
+      "para_index": 470,
+      "text": "Th\u00f4ng tin t\u00e0i li\u1ec7u",
+      "style": "Normal"
+    },
+    {
+      "para_index": 471,
+      "text": "Th\u00f4ng tin t\u00e0i li\u1ec7u",
+      "style": "Normal"
+    },
+    {
+      "para_index": 482,
+      "text": "STT",
+      "style": "Normal"
+    },
+    {
+      "para_index": 483,
+      "text": "Ng\u00e0y",
+      "style": "Normal"
+    },
+    {
+      "para_index": 484,
+      "text": "Phi\u00ean b\u1ea3n",
+      "style": "Normal"
+    },
+    {
+      "para_index": 485,
+      "text": "H\u00ecnh th\u1ee9c*",
+      "style": "Normal"
+    },
+    {
+      "para_index": 486,
+      "text": "M\u00f4 t\u1ea3",
+      "style": "Normal"
+    },
+    {
+      "para_index": 487,
+      "text": "T\u00e1c gi\u1ea3",
+      "style": "Normal"
+    },
+    {
+      "para_index": 494,
+      "text": "M\u1ee5c",
+      "style": "Normal"
+    },
+    {
+      "para_index": 495,
+      "text": "N\u1ed9i dung",
+      "style": "Normal"
+    },
+    {
+      "para_index": 508,
+      "text": "\u0110\u1ed1i t\u01b0\u1ee3ng",
+      "style": "Normal"
+    },
+    {
+      "para_index": 509,
+      "text": "M\u1ee5c \u0111\u00edch s\u1eed d\u1ee5ng",
+      "style": "Normal"
+    },
+    {
+      "para_index": 518,
+      "text": "Nh\u00f3m object",
+      "style": "Normal"
+    },
+    {
+      "para_index": 519,
+      "text": "S\u1ed1 l\u01b0\u1ee3ng",
+      "style": "Normal"
+    },
+    {
+      "para_index": 520,
+      "text": "Vai tr\u00f2",
+      "style": "Normal"
+    },
+    {
+      "para_index": 545,
+      "text": "STT",
+      "style": "Normal"
+    },
+    {
+      "para_index": 546,
+      "text": "Object",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "C\u00d4NG TY TNHH GI\u1ea2I PH\u00c1P PH\u00c2N T\u00cdCH D\u1eee LI\u1ec6U INSIGHT DATA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "text": "T\u00c0I LI\u1ec6U",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": "\u0110\u1eb6C T\u1ea2 D\u1eee LI\u1ec6U D\u1ef0 \u00c1N HG MEDIA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": "",
+        "style": "Normal"
+      },
+      {
+        "para_index": 6,
+        "text": "B\u1ea2NG THEO D\u00d5I HI\u1ec6U L\u1ef0C V\u00c0 THAY \u0110\u1ed4I",
+        "style": "Heading 1"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "C\u00d4NG TY TNHH GI\u1ea2I PH\u00c1P PH\u00c2N T\u00cdCH D\u1eee LI\u1ec6U INSIGHT DATA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "run_text": "T\u00c0I LI\u1ec6U",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "\u0110\u1eb6C T\u1ea2 D\u1eee LI\u1ec6U D\u1ef0 \u00c1N HG MEDIA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 6,
+        "run_text": "B\u1ea2NG THEO D\u00d5I HI\u1ec6U L\u1ef0C V\u00c0 THAY \u0110\u1ed4I",
+        "style": "Heading 1"
+      },
+      {
+        "para_index": 8,
+        "run_text": "(*) A (Add) \u2013 th\u00eam m\u1edbi, M (Modify) \u2013 s\u1eeda \u0111\u1ed5i, D (Delete) \u2013 x\u00f3a",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

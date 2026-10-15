@@ -1,0 +1,168 @@
+{
+  "input": "C:\\Users\\Admin\\Desktop\\New folder\\SD_26_GIMASYS_01_T\u00c0I_LI\u1ec6U_M\u00d4_T\u1ea2_D\u1eee_LI\u1ec6U_D\u1ef0_\u00c1N_GMS.docx",
+  "fonts_by_char_count": {},
+  "direct_run_formatting_runs": 115,
+  "direct_paragraph_formatting_paragraphs": 864,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 1,
+      "text": "C\u00d4NG TY TNHH GI\u1ea2I PH\u00c1P PH\u00c2N T\u00cdCH D\u1eee LI\u1ec6U INSIGHT DATA",
+      "style": "Normal"
+    },
+    {
+      "para_index": 7,
+      "text": "T\u00c0I LI\u1ec6U",
+      "style": "Normal"
+    },
+    {
+      "para_index": 8,
+      "text": "M\u00d4 T\u1ea2 D\u1eee LI\u1ec6U D\u1ef0 \u00c1N GMS",
+      "style": "Normal"
+    },
+    {
+      "para_index": 14,
+      "text": "B\u1ea2NG THEO D\u00d5I HI\u1ec6U L\u1ef0C V\u00c0 THAY \u0110\u1ed4I",
+      "style": "Normal"
+    },
+    {
+      "para_index": 27,
+      "text": "M\u1ee4C L\u1ee4C",
+      "style": "Normal"
+    },
+    {
+      "para_index": 54,
+      "text": "Domain: 1a_hotstreaming",
+      "style": "Normal"
+    },
+    {
+      "para_index": 56,
+      "text": "Domain: commerce_data",
+      "style": "Normal"
+    },
+    {
+      "para_index": 58,
+      "text": "Domain: master_data",
+      "style": "Normal"
+    },
+    {
+      "para_index": 60,
+      "text": "Domain: ffp",
+      "style": "Normal"
+    },
+    {
+      "para_index": 63,
+      "text": "Pipeline 1: master_data",
+      "style": "Normal"
+    },
+    {
+      "para_index": 65,
+      "text": "Pipeline 2: 1a_hotstreaming",
+      "style": "Normal"
+    },
+    {
+      "para_index": 67,
+      "text": "Pipeline 3: commerce_data",
+      "style": "Normal"
+    },
+    {
+      "para_index": 71,
+      "text": "Pipeline 4: ffp",
+      "style": "Normal"
+    },
+    {
+      "para_index": 93,
+      "text": "Pipeline 1: master_data",
+      "style": "Normal"
+    },
+    {
+      "para_index": 96,
+      "text": "Pipeline 2: 1a_hotstreaming",
+      "style": "Normal"
+    },
+    {
+      "para_index": 99,
+      "text": "Pipeline 3: commerce_data",
+      "style": "Normal"
+    },
+    {
+      "para_index": 107,
+      "text": "Pipeline 4: ffp",
+      "style": "Normal"
+    },
+    {
+      "para_index": 156,
+      "text": "\u0110\u1ed1i t\u01b0\u1ee3ng",
+      "style": "Normal"
+    },
+    {
+      "para_index": 157,
+      "text": "Vai tr\u00f2",
+      "style": "Normal"
+    },
+    {
+      "para_index": 158,
+      "text": "Ph\u1ea7n li\u00ean quan",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "C\u00d4NG TY TNHH GI\u1ea2I PH\u00c1P PH\u00c2N T\u00cdCH D\u1eee LI\u1ec6U INSIGHT DATA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "text": " ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": " ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": " ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "text": "",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "C\u00d4NG TY TNHH GI\u1ea2I PH\u00c1P PH\u00c2N T\u00cdCH D\u1eee LI\u1ec6U INSIGHT DATA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 7,
+        "run_text": "T\u00c0I LI\u1ec6U",
+        "style": "Normal"
+      },
+      {
+        "para_index": 8,
+        "run_text": "M\u00d4 T\u1ea2 D\u1eee LI\u1ec6U D\u1ef0 \u00c1N GMS",
+        "style": "Normal"
+      },
+      {
+        "para_index": 14,
+        "run_text": "B\u1ea2NG THEO D\u00d5I HI\u1ec6U L\u1ef0C V\u00c0 THAY \u0110\u1ed4I",
+        "style": "Normal"
+      },
+      {
+        "para_index": 27,
+        "run_text": "M\u1ee4C L\u1ee4C",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}
